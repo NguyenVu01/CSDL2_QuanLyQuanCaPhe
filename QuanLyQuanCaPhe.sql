@@ -98,16 +98,6 @@ CREATE TABLE CONGTHUC
 	CONSTRAINT fk_ct_mon FOREIGN KEY (MaMon) REFERENCES MON(MaMon),
 );
 
--- 11. Tạo bảng CHẤM CÔNG 
-CREATE TABLE CHAMCONG
-(
-	STT INT IDENTITY PRIMARY KEY,
-	MaNV INT NOT NULL, 
-	NgayChamCong DATE DEFAULT GETDATE(), 
-	SoCa INT, 
-	CONSTRAINT fk_chamcong_nhanvien FOREIGN KEY (MaNV) REFERENCES NHANVIEN(MaNV)
-);
-
 -- Insert data for all tables
 -- 1.Bảng tài TÀI KHOẢN
 INSERT INTO TAIKHOAN(TenDangNhap, MatKhau, TenNguoiDung, LoaiTaiKhoan)
@@ -251,7 +241,7 @@ VALUES(N'Lê Hồng Anh', '1996/6/19', N'Văn Giang, Hưng Yên', '0998743215', 
 INSERT INTO NHANVIEN( tennv, ngaysinh, diachi, sdt, hoatdong,  bophan, luong)
 VALUES(N'Trần Đức Nam', '1996/8/11', N'Thanh Xuân, Hà Nội', '0946342223', 1, N'Thu ngân', 2000000);
 INSERT INTO NHANVIEN( tennv, ngaysinh, diachi, sdt, hoatdong,  bophan, luong)
-VALUES(N'Lê Ngọc Huyền', '1994/4/17', N'Hoàn Kiếm, Hà Nội', '0971552222', 1, 'Quản lý', 5000000);
+VALUES(N'Lê Ngọc Huyền', '1994/4/17', N'Hoàn Kiếm, Hà Nội', '0971552222', 1, N'Quản lý', 5000000);
 select * from NHANVIEN;
 -- 7. Bảng HÓA ĐƠN
 INSERT INTO HOADON(NgayDat, NgayGiao, MaNV,  MaBan, TrangThai)
@@ -639,6 +629,14 @@ GO
 
 EXEC dbo.USP_GetTableList;
 
+-- Thủ tục đăng nhập hạn chế lỗi sql injection
+CREATE PROC USP_Login
+@userName nvarchar(100), @passWord nvarchar(100)
+AS
+BEGIN
+	SELECT * FROM TAIKHOAN WHERE TenDangNhap = @userName AND MatKhau = @passWord
+END
+
 -- SQL kết hợp để hiển thị lên ListBill
 Select TenMon, SoLuong, Gia, SoLuong*Gia as ThanhTien
 from HOADON hd, CHITIETHD ct, Mon m
@@ -786,14 +784,52 @@ Select sum(TongTien) as DOANHTHU from HOADON where NgayDat >= '20220302' AND Nga
 Select MONTH(NgayGiao) as [Tháng], sum(TongTien) as DoanhThu from HOADON group by MONTH(NgayGiao)
 
 -- Table ThongTinHD
-SELECT a.MaHD, a.NgayDat, a.Maban, b.TenNV, GiamGia, TongTien*(100-GiamGia) as ThanhTien
+SELECT a.MaHD, a.NgayDat, a.Maban, b.TenNV, GiamGia, TongTien*(100-GiamGia)/100 as ThanhTien
 FROM HOADON AS a, Nhanvien AS b
-WHERE a.MaHD = 67
+WHERE a.MaHD = 1065
 AND a.MaNV = b.MaNV
-
+select * from hoadon
 -- Table ThongtinMon
 select TenMon, SoLuong, Gia, (SoLuong*Gia) as ThanhTien from chitiethd ct, mon m
 where ct.MaMon = m.MaMon
 and MaHD = 66;
 
-select * from hoadon;
+-- Tạo thủ tục cập nhật tài khoản
+CREATE PROC USP_UpdateAccount
+@userName NVARCHAR(100), @displayName NVARCHAR(100), @password NVARCHAR(100), @newPassword NVARCHAR(100)
+AS
+BEGIN
+	DECLARE @isRightPass INT = 0
+	
+	SELECT @isRightPass = COUNT(*) FROM TAIKHOAN WHERE TenDangNhap = @userName AND MatKhau = @password
+	
+	IF (@isRightPass = 1)
+	BEGIN
+		IF (@newPassword = NULL OR @newPassword = '')
+		BEGIN
+			UPDATE TAIKHOAN SET TenNguoiDung = @displayName WHERE TenDangNhap = @userName
+		END		
+		ELSE
+			UPDATE TAIKHOAN SET TenNguoiDung = @displayName, MatKhau = @newPassword WHERE TenDangNhap = @userName
+	end
+END
+
+
+-- Các câu lệnh thêm sửa xóa tài khoản
+INSERT TAIKHOAN ( TenDangNhap, TenNguoiDung, LoaiTaiKhoan ) VALUES  ( N'nhanvien1', N'nhan vien dep trai', 1)
+UPDATE TAIKHOAN SET TenNguoiDung = N'Dep trai', LoaiTaiKhoan = 0 WHERE TenNguoiDung = N'nhan vien dep trai';
+Delete TAIKHOAN where TenNguoiDung = N'nhan vien dep trai'
+UPDATE TAIKHOAN set MatKhau = N'0' where TenNguoiDung = N'nhan vien dep trai'
+DELETE TAIKHOAN where TenNguoiDung = N'Kẻ tổn thương đẹp trai'
+
+select * from nhanvien
+
+UPDATE NHANVIEN set BoPhan= N'Quản lý' where MaNV = 7;
+
+
+SELECT MaHD, NgayDat, Maban, GiamGia, TongTien, TongTien*(100-GiamGia)/100 as ThanhTien
+FROM HOADON
+
+Select DATEPART(QUARTER, NgayGiao) as [Quý], sum(TongTien) as DoanhThu from HOADON group by DATEPART(QUARTER, NgayGiao)
+
+SELECT TenNL, SoLuong FROM NGUYENLIEU
