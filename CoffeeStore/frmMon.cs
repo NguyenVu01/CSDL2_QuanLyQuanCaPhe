@@ -40,6 +40,13 @@ namespace CoffeeStore
             dataGridView.Columns[2].Width = 80;
             dataGridView.Columns[3].Width = 100;
         }
+        private void ResetValues()
+        {
+            txtMaMon.Text = "";
+            txtTenMon.Text = "";
+            txtGia.Text = "";
+            cbxMaLoaiMon.Text = "";
+        }
 
         private void btnDong_Click(object sender, EventArgs e)
         {
@@ -57,15 +64,6 @@ namespace CoffeeStore
             ResetValues();
             txtMaMon.Focus();
         }
-
-        private void ResetValues()
-        {
-            txtMaMon.Text = "";
-            txtTenMon.Text = "";
-            txtGia.Text = "";
-            cbxMaLoaiMon.Text = "";
-        }
-
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql;

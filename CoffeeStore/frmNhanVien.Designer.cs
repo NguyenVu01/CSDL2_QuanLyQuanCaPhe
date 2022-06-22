@@ -127,7 +127,7 @@
             this.btnDong.Location = new System.Drawing.Point(773, 151);
             this.btnDong.Name = "btnDong";
             this.btnDong.Size = new System.Drawing.Size(132, 43);
-            this.btnDong.TabIndex = 10;
+            this.btnDong.TabIndex = 14;
             this.btnDong.Text = "Đóng";
             this.btnDong.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnDong.UseVisualStyleBackColor = true;
@@ -149,7 +149,7 @@
             this.cbxBoPhan.Location = new System.Drawing.Point(103, 3);
             this.cbxBoPhan.Name = "cbxBoPhan";
             this.cbxBoPhan.Size = new System.Drawing.Size(189, 24);
-            this.cbxBoPhan.TabIndex = 2;
+            this.cbxBoPhan.TabIndex = 7;
             // 
             // label9
             // 
@@ -171,7 +171,7 @@
             this.btnBoQua.Location = new System.Drawing.Point(635, 151);
             this.btnBoQua.Name = "btnBoQua";
             this.btnBoQua.Size = new System.Drawing.Size(132, 43);
-            this.btnBoQua.TabIndex = 9;
+            this.btnBoQua.TabIndex = 13;
             this.btnBoQua.Text = "Bỏ qua";
             this.btnBoQua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnBoQua.UseVisualStyleBackColor = true;
@@ -196,7 +196,7 @@
             this.cbxHoatDong.Location = new System.Drawing.Point(103, 2);
             this.cbxHoatDong.Name = "cbxHoatDong";
             this.cbxHoatDong.Size = new System.Drawing.Size(189, 24);
-            this.cbxHoatDong.TabIndex = 1;
+            this.cbxHoatDong.TabIndex = 8;
             // 
             // label11
             // 
@@ -218,7 +218,7 @@
             this.btnLuu.Location = new System.Drawing.Point(497, 151);
             this.btnLuu.Name = "btnLuu";
             this.btnLuu.Size = new System.Drawing.Size(132, 43);
-            this.btnLuu.TabIndex = 8;
+            this.btnLuu.TabIndex = 12;
             this.btnLuu.Text = "Lưu nhân viên";
             this.btnLuu.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnLuu.UseVisualStyleBackColor = true;
@@ -234,7 +234,7 @@
             this.btnSua.Location = new System.Drawing.Point(359, 151);
             this.btnSua.Name = "btnSua";
             this.btnSua.Size = new System.Drawing.Size(132, 43);
-            this.btnSua.TabIndex = 7;
+            this.btnSua.TabIndex = 11;
             this.btnSua.Text = "Sửa nhân viên";
             this.btnSua.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnSua.UseVisualStyleBackColor = true;
@@ -250,7 +250,7 @@
             this.btnXoa.Location = new System.Drawing.Point(221, 151);
             this.btnXoa.Name = "btnXoa";
             this.btnXoa.Size = new System.Drawing.Size(132, 43);
-            this.btnXoa.TabIndex = 6;
+            this.btnXoa.TabIndex = 10;
             this.btnXoa.Text = "Xóa nhân viên";
             this.btnXoa.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnXoa.UseVisualStyleBackColor = true;
@@ -266,7 +266,7 @@
             this.btnThem.Location = new System.Drawing.Point(83, 151);
             this.btnThem.Name = "btnThem";
             this.btnThem.Size = new System.Drawing.Size(132, 43);
-            this.btnThem.TabIndex = 5;
+            this.btnThem.TabIndex = 9;
             this.btnThem.Text = "Thêm nhân viên";
             this.btnThem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnThem.UseVisualStyleBackColor = true;
@@ -287,7 +287,7 @@
             this.txtDiaChi.Location = new System.Drawing.Point(103, 3);
             this.txtDiaChi.Name = "txtDiaChi";
             this.txtDiaChi.Size = new System.Drawing.Size(189, 22);
-            this.txtDiaChi.TabIndex = 1;
+            this.txtDiaChi.TabIndex = 4;
             // 
             // label7
             // 
@@ -314,7 +314,7 @@
             this.txtLuong.Location = new System.Drawing.Point(103, 3);
             this.txtLuong.Name = "txtLuong";
             this.txtLuong.Size = new System.Drawing.Size(189, 22);
-            this.txtLuong.TabIndex = 1;
+            this.txtLuong.TabIndex = 6;
             // 
             // label6
             // 
@@ -342,7 +342,7 @@
             this.mskSoDienThoai.Mask = "(999) 000-0000";
             this.mskSoDienThoai.Name = "mskSoDienThoai";
             this.mskSoDienThoai.Size = new System.Drawing.Size(189, 22);
-            this.mskSoDienThoai.TabIndex = 1;
+            this.mskSoDienThoai.TabIndex = 5;
             // 
             // label5
             // 
@@ -370,7 +370,7 @@
             this.mskNgaySinh.Mask = "00/00/0000";
             this.mskNgaySinh.Name = "mskNgaySinh";
             this.mskNgaySinh.Size = new System.Drawing.Size(189, 25);
-            this.mskNgaySinh.TabIndex = 1;
+            this.mskNgaySinh.TabIndex = 3;
             this.mskNgaySinh.ValidatingType = typeof(System.DateTime);
             // 
             // label4
@@ -398,7 +398,7 @@
             this.txtHoTen.Location = new System.Drawing.Point(103, 3);
             this.txtHoTen.Name = "txtHoTen";
             this.txtHoTen.Size = new System.Drawing.Size(189, 22);
-            this.txtHoTen.TabIndex = 1;
+            this.txtHoTen.TabIndex = 2;
             // 
             // label3
             // 
@@ -460,7 +460,7 @@
             this.btnHienThi.Location = new System.Drawing.Point(291, 21);
             this.btnHienThi.Name = "btnHienThi";
             this.btnHienThi.Size = new System.Drawing.Size(85, 34);
-            this.btnHienThi.TabIndex = 4;
+            this.btnHienThi.TabIndex = 15;
             this.btnHienThi.Text = "Refresh";
             this.btnHienThi.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnHienThi.UseVisualStyleBackColor = false;
@@ -484,7 +484,7 @@
             this.btnTimKiem.Location = new System.Drawing.Point(629, 21);
             this.btnTimKiem.Name = "btnTimKiem";
             this.btnTimKiem.Size = new System.Drawing.Size(85, 34);
-            this.btnTimKiem.TabIndex = 2;
+            this.btnTimKiem.TabIndex = 17;
             this.btnTimKiem.Text = "Tìm kiếm";
             this.btnTimKiem.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.btnTimKiem.UseVisualStyleBackColor = true;
@@ -495,7 +495,7 @@
             this.txtTimKiem.Location = new System.Drawing.Point(396, 27);
             this.txtTimKiem.Name = "txtTimKiem";
             this.txtTimKiem.Size = new System.Drawing.Size(216, 22);
-            this.txtTimKiem.TabIndex = 1;
+            this.txtTimKiem.TabIndex = 16;
             this.toolTipTimKiem.SetToolTip(this.txtTimKiem, "Hãy nhập tên nhân viên");
             // 
             // frmNhanVien

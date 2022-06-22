@@ -25,6 +25,8 @@ namespace CoffeeStore
             txtMaNhanVien.Enabled = false;
             btnLuu.Enabled = false;
             btnBoQua.Enabled = false;
+            string sql = "select distinct bophan from nhanvien";
+            DAO.FillCombo(sql, cbxBoPhan, "BoPhan", "BoPhan");
             Load_DataGridView();
         }
 
@@ -34,23 +36,8 @@ namespace CoffeeStore
             sql = "SELECT * FROM NhanVien";
             tblNhanVien = DAO.LoadDataToTable(sql);
             dataGridView.DataSource = tblNhanVien;
-            /*            dataGridView.Columns[1].Width = 200;
-                        dataGridView.Columns[3].Width = 150;*/
             dataGridView.EditMode = DataGridViewEditMode.EditProgrammatically;
         }
-
-/*        private void dataGridView_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            txtMaNhanVien.Text = dataGridView.CurrentRow.Cells[0].Value.ToString();
-            txtHoTen.Text = dataGridView.CurrentRow.Cells[1].Value.ToString();
-            mskNgaySinh.Text = dataGridView.CurrentRow.Cells[2].Value.ToString();
-            txtDiaChi.Text = dataGridView.CurrentRow.Cells[3].Value.ToString();
-            mskSoDienThoai.Text = dataGridView.CurrentRow.Cells[4].Value.ToString();
-            cbxHoatDong.Text = dataGridView.CurrentRow.Cells[5].Value.ToString();
-            cbxBoPhan.Text = dataGridView.CurrentRow.Cells[6].Value.ToString();
-            txtLuong.Text = dataGridView.CurrentRow.Cells[7].Value.ToString();
-        }*/
-
         private void btnDong_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -63,7 +50,6 @@ namespace CoffeeStore
             btnBoQua.Enabled = true;
             btnLuu.Enabled = true;
             btnThem.Enabled = false;
-            txtMaNhanVien.Enabled = true;
             ResetValues(); 
             txtMaNhanVien.Focus();
         }
@@ -83,34 +69,74 @@ namespace CoffeeStore
         private void btnLuu_Click(object sender, EventArgs e)
         {
             string sql;
-            if (txtMaNhanVien.Text.Trim().Length == 0)
+            if (tblNhanVien.Rows.Count == 0)
             {
-                MessageBox.Show("Bạn phải nhập mã nhân viên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                txtMaNhanVien.Focus();
+                MessageBox.Show("Không còn dữ liệu!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 return;
             }
             if (txtHoTen.Text.Trim().Length == 0)
             {
-                MessageBox.Show("Bạn phải nhập họ tên", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Bạn phải nhập tên khách hàng", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtHoTen.Focus();
                 return;
             }
-            sql = "SELECT MaNV FROM NhanVien WHERE MaNV =N'" + txtMaNhanVien.Text.Trim() + "'";
+            if (txtDiaChi.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Bạn phải nhập địa chỉ", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                txtDiaChi.Focus();
+                return;
+            }
+            if (mskNgaySinh.Text == "  /  /")
+            {
+                MessageBox.Show("Bạn phải nhập ngày sinh", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                mskNgaySinh.Focus();
+                return;
+            }
+            if (!DAO.IsDate(mskNgaySinh.Text))
+            {
+                MessageBox.Show("Bạn phải nhập lại ngày sinh", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                mskNgaySinh.Text = "";
+                mskNgaySinh.Focus();
+                return;
+            }
+            if (mskSoDienThoai.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Bạn phải nhập số điện thoại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                mskSoDienThoai.Focus();
+                return;
+            }
+            if (cbxHoatDong.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Bạn phải chọn hoạt động! 1.Hoạt động, 0.Không hoạt động", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbxHoatDong.Focus();
+                return;
+            }
+            if (cbxBoPhan.Text.Trim().Length == 0)
+            {
+                MessageBox.Show("Bạn phải chọn bộ phận làm việc của nhân viên đó!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                cbxBoPhan.Focus();
+                return;
+            }
+/*            sql = "SELECT MaNV FROM NhanVien WHERE MaNV =N'" + txtMaNhanVien.Text.Trim() + "'";
             if (DAO.CheckKey(sql))
             {
                 MessageBox.Show("Mã nhân viên này đã có, bạn phải nhập mã khác", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 txtMaNhanVien.Focus();
                 txtMaNhanVien.Text = "";
                 return;
-            }
-            sql = "SET IDENTITY_INSERT NHANVIEN ON";
-            DAO.RunSql(sql);
-            sql = "INSERT INTO NhanVien(MaNV,TenNV, NgaySinh, DiaChi, SDT, HoatDong, BoPhan, Luong) VALUES(N'" + txtMaNhanVien.Text + "',N'" + txtHoTen.Text + "',N'" +mskNgaySinh.Text + "',N'" 
+            }*/
+            try
+            {
+                sql = "INSERT INTO NhanVien(TenNV, NgaySinh, DiaChi, SDT, HoatDong, BoPhan, Luong) VALUES(N'" + txtHoTen.Text + "',N'" + mskNgaySinh.Text + "',N'"
                 + txtDiaChi.Text + "',N'" + mskSoDienThoai.Text + "',N'" + cbxHoatDong.Text + "',N'" + cbxBoPhan.Text + "', '" + txtLuong.Text + "')";
-            DAO.RunSql(sql);
+                DAO.RunSql(sql);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Đã có lỗi gì đó, hãy thử lại!" + ex.Message, "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
             Load_DataGridView();
-            sql = "SET IDENTITY_INSERT NHANVIEN OFF";
-            DAO.RunSql(sql);
             ResetValues();
             btnXoa.Enabled = true;
             btnThem.Enabled = true;
@@ -216,7 +242,6 @@ namespace CoffeeStore
                 mskNgaySinh.Focus();
                 return;
             }
-
             if (mskSoDienThoai.Text.Trim().Length == 0)
             {
                 MessageBox.Show("Bạn phải nhập số điện thoại", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -236,11 +261,11 @@ namespace CoffeeStore
                 return;
             }
             sql = "UPDATE NHANVIEN SET  TenNV =N'" + txtHoTen.Text.Trim().ToString() +
-                "', NgaySinh = N'" + txtDiaChi.Text.Trim().ToString() +
-                "', DiaChi = N'" +  mskNgaySinh.Text.Trim().ToString() +
+                "', NgaySinh = N'" + DAO.ConvertDateTime(mskNgaySinh.Text) +
+                "', DiaChi = N'" + txtDiaChi.Text.Trim().ToString() +
                 "', SDT ='" + mskSoDienThoai.Text.Trim().ToString() +
                 "', HoatDong = N'" + cbxHoatDong.Text +
-                "', BoPhan ='" + cbxBoPhan.Text.Trim().ToString() +
+                "', BoPhan = N'" + cbxBoPhan.Text.Trim().ToString() +
                 "', Luong ='" + txtLuong.Text.Trim().ToString() +
                 "' WHERE MaNV =N'" + txtMaNhanVien.Text + "'";
             DAO.RunSql(sql);
@@ -273,7 +298,6 @@ namespace CoffeeStore
             btnSua.Enabled = true;
             btnXoa.Enabled = true;
             btnBoQua.Enabled = true;
-
         }
     }
 }

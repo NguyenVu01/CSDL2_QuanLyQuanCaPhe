@@ -344,9 +344,10 @@
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "frmBan";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmBan";
+            this.Text = "Quản lý bàn";
             this.Load += new System.EventHandler(this.frmBan_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();

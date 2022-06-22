@@ -24,7 +24,7 @@ namespace CoffeeStore
             txtTenNL.Enabled = false;
             txtSoLuong.Enabled = false;
             txtDonViTinh.Enabled = false;
-            btnBoQua.Enabled = false;
+            btnBoQua.Enabled = true;
             Load_DataGridView();
         }
 
@@ -88,7 +88,7 @@ namespace CoffeeStore
         private void btnBoQua_Click(object sender, EventArgs e)
         {
             ResetValues();
-            btnBoQua.Enabled = false;
+            btnBoQua.Enabled = true;
             btnSua.Enabled = true;
             txtMaNL.Enabled = false;
             txtTenNL.Enabled = false;
@@ -137,7 +137,7 @@ namespace CoffeeStore
             }
             Load_DataGridView();
             ResetValues();
-            btnBoQua.Enabled = false;
+            btnBoQua.Enabled = true;
         }
     }
 }

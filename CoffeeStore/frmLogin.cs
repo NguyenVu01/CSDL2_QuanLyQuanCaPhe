@@ -34,11 +34,20 @@ namespace CoffeeStore
         {
             string userName = txtTenDangNhap.Text;
             string passWord = txtMatKhau.Text;
-            if(DangNhap(userName, passWord))
+            if (DangNhap(userName, passWord))
             {
-                frmMain f = new frmMain();
+                Account loginAccount = AccountDAO.Instance.GetAccountByUserName(userName);
+                frmMain f = new frmMain(loginAccount);
                 this.Hide();
                 f.ShowDialog();
+                try
+                {
+                    this.Show();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Hẹn gặp lại nhaaa");
+                }
             }
             else
             {

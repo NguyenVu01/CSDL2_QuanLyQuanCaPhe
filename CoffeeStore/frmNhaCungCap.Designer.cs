@@ -381,7 +381,7 @@
             this.MinimizeBox = false;
             this.Name = "frmNhaCungCap";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "frmNhaCungCap";
+            this.Text = "Thông tin về nhà cung cấp";
             this.Load += new System.EventHandler(this.frmNhaCungCap_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
